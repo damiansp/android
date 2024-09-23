@@ -1,5 +1,6 @@
 package com.example.todolist
 
+import android.content.res.Configuration
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -27,6 +28,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.coerceAtLeast
 import androidx.compose.ui.unit.dp
@@ -105,7 +107,10 @@ private fun Greeting(name: String, modifier: Modifier = Modifier) {
                         .weight(1f)
                         .padding(bottom = extraPadding.coerceAtLeast(0.dp))) {
                 Text(text = "Hello,")
-                Text(text = "$name!")
+                Text(
+                    text = "$name!",
+                    style = MaterialTheme.typography.headlineMedium.copy(
+                        fontWeight = FontWeight.ExtraBold))
             }
             ElevatedButton(onClick = { expanded = !expanded }) {
                 Text(if (expanded) "Show less" else "Show more")
@@ -123,6 +128,20 @@ fun MyAppPreview() {
     }
 }
 
+
+@Preview(
+    showBackground = true,
+    widthDp = 320,
+    uiMode = Configuration.UI_MODE_NIGHT_YES,
+    name = "GreetingPreviewDark"
+)
+@Preview(showBackground = true, widthDp = 320)
+@Composable
+fun GreetingPreviw() {
+    TodoListTheme {
+        Greetings()
+    }
+}
 
 @Preview(showBackground = true, widthDp = 320, heightDp = 320)
 @Composable
