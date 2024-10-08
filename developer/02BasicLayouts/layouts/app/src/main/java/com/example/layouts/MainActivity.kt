@@ -46,6 +46,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.viewModelFactory
 import com.example.layouts.ui.theme.LayoutsTheme
 
 class MainActivity : ComponentActivity() {
@@ -82,6 +83,32 @@ fun SearchBar(modifier: Modifier = Modifier) {
 @Composable
 fun SearchBarPreview() {
     LayoutsTheme { SearchBar(Modifier.padding(8.dp)) }
+}
+
+
+@Composable
+fun HomeSection(
+        @StringRes title: Int, modifier: Modifier = Modifier, content: @Composable () -> Unit) {
+    Column(modifier) {
+        Text(
+            text = stringResource(id = title),
+            style = MaterialTheme.typography.titleMedium,
+            modifier = Modifier
+                .paddingFromBaseline(top = 40.dp, bottom = 16.dp)
+                .padding(horizontal = 16.dp))
+        content()
+    }
+}
+
+
+@Preview(showBackground = true, backgroundColor = 0xFFF5F0EE)
+@Composable
+fun HomeSectionPreview() {
+    LayoutsTheme {
+        HomeSection(title = R.string.align_your_body) {
+            AlignYourBodyRow()
+        }
+    }
 }
 
 
