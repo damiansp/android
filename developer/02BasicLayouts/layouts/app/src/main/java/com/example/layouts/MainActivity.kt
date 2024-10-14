@@ -8,6 +8,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.annotation.DrawableRes
+import androidx.annotation.Size
 import androidx.annotation.StringRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
@@ -49,6 +50,10 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
+import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
+import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
+import androidx.compose.material3.windowsizeclass.WindowSizeClass
+import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.Alignment
@@ -64,17 +69,31 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.example.layouts.ui.theme.LayoutsTheme
 
-class MainActivity : ComponentActivity() {
+class MainActivity: ComponentActivity() {
+    @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
+            val windowSizeClass = calculateWindowSizeClass(this)
+            SootheApp(windowSizeClass)
+            /*
             LayoutsTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
 
                 }
             }
+            */
         }
+    }
+}
+
+
+@Composable
+fun SootheApp(windowSize: WindowSizeClass) {
+    when (windowSize.widthSizeClass) {
+        WindowWidthSizeClass.Compact -> { SootheAppPortrait() }
+        WinodwWidthSizeClass.Expanded -> { SootheAppLandscape() }
     }
 }
 
