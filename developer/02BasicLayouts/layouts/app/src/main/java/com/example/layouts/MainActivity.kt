@@ -16,6 +16,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -40,6 +41,8 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.NavigationRail
+import androidx.compose.material3.NavigationRailItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SegmentedButtonDefaults.Icon
 import androidx.compose.material3.Surface
@@ -52,6 +55,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.focus.focusModifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -258,5 +262,45 @@ private fun SootheBottomNavigation(modifier: Modifier = Modifier) {
             onClick = { /*TODO*/ },
             icon = { Icon(imageVector = Icons.Default.AccountCircle, contentDescription = null) },
             label = { Text(text= stringResource(R.string.bottom_nav_profile)) })
+    }
+}
+
+
+@Composable
+fun SootheAppLandscape() {
+    LayoutsTheme {
+        Surface(color = MaterialTheme.colorScheme.background) {
+            Row {
+                SootheNavigationRail()
+                HomeScreen()
+            }
+        }
+    }
+}
+
+
+@Composable
+private fun SootheNavigationRail(modifier: Modifier = Modifier) {
+    NavigationRail(
+            modifier = modifier.padding(start = 8.dp, end = 8.dp),
+            containerColor = MaterialTheme.colorScheme.background) {
+        Column(
+                modifier = modifier.fillMaxHeight(),
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally) {
+            NavigationRailItem(
+                selected = true,
+                onClick = { /*TODO*/ },
+                icon = { Icon(imageVector = Icons.Default.Home, contentDescription = null) },
+                label = { Text(stringResource(R.string.bottom_nav_home)) })
+            Spacer(modifier = Modifier.height(8.dp))
+            NavigationRailItem(
+                selected = false,
+                onClick = { /*TODO*/ },
+                icon = {
+                    Icon(imageVector = Icons.Default.AccountCircle, contentDescription = null)
+                },
+                label = { Text(stringResource(R.string.bottom_nav_profile)) })
+        }
     }
 }
