@@ -61,6 +61,15 @@ fun DemoScreen() {
 }
 
 
+@Preview(showSystemUi = true)
+@Composable
+fun DemoScreenPreview() {
+    ComposeDemoTheme {
+        DemoScreen()
+    }
+}
+
+
 @Composable
 fun DemoText(msg: String, fontSize: Float) {
     Text(text = msg, fontSize = fontSize.sp, fontWeight = FontWeight.Bold)
