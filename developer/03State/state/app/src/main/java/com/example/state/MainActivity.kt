@@ -6,6 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
@@ -56,8 +57,8 @@ fun WaterCounter(modifier: Modifier = Modifier) {
             // Text present only if button pressed at least once
             Text(text = "\nYou've had $count glasses.")
         }
-        Button(onClick = { count++ }, Modifier.padding(top = 8.dp), enabled = count < 10) {
-            Text("Add one")
+        Button(onClick = { count++ }, enabled = count < 10) {
+                Text("Add one")
         }
     }
 }
