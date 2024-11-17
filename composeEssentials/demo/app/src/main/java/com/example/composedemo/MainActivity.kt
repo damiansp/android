@@ -34,7 +34,9 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             ComposeDemoTheme {
-                Surface(modifier = Modifier.fillMaxSize()) {
+                Surface(
+                        modifier = Modifier.fillMaxSize(),
+                        color = MaterialTheme.colorScheme.background) {
                     DemoScreen()
                 }
             }
