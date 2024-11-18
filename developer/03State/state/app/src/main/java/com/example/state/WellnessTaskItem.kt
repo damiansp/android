@@ -20,13 +20,16 @@ import androidx.compose.ui.unit.dp
 
 
 @Composable
-fun WellnessTaskItem(taskName: String, modifier: Modifier) {
+fun WellnessTaskItem(
+        taskName: String,
+        onClose: () -> Unit,
+        modifier: Modifier = Modifier) {
     var checkedState by rememberSaveable { mutableStateOf(false) }
     WellnessTaskItem(
         taskName = taskName,
         isChecked = checkedState,
         onCheckedChange = { newValue -> checkedState = newValue },
-        onClose = { /*TODO*/ },
+        onClose = onClose,
         modifier = modifier)
 }
 
