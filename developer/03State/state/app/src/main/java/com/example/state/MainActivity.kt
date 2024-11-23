@@ -33,6 +33,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.focusModifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.state.ui.theme.StateTheme
 
 class MainActivity : ComponentActivity() {
@@ -53,12 +55,23 @@ class MainActivity : ComponentActivity() {
 
 
 @Composable
-fun WellnessScreen(modifier: Modifier = Modifier) {
+fun WellnessScreen(
+        modifier: Modifier = Modifier, wellnessViewModel: WellnessViewModel = viewModel()) {
     Column(modifier = modifier) {
         StatefulCounter()
-        val list = remember { getWellnessTasks().toMutableStateList() }
-        WellnessTaskList(list = list, onCloseTask = { task -> list.remove(task)} )
+        WellnessTaskList(
+            list = wellnessViewModel.tasks,
+            onCloseTask = { task -> wellnessViewModel.remove(task) })
     }
+}
+
+
+class WellnessViewModel: ViewModel() {
+    private val _tasks = getWellnessTasks().toMutableStateList()
+    val tasks : List<WellnessTask>
+        get() = _tasks
+
+    fun remove(item: WellnessTask) { _tasks.remove(item) }
 }
 
 private fun getWellnessTasks() = List(30) { i -> WellnessTask(i, "Task #$i") }
