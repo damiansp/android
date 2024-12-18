@@ -5,12 +5,17 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
@@ -33,6 +38,58 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
+}
+
+
+@Composable
+fun MyBox() {
+    Box {
+        Button(onClick = { /*TODO*/ }) {
+            Text("Click Me")
+        }
+        Text(text="Hello from in front of the button!", modifier = Modifier.align(Alignment.Center))
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun MyBoxPreview() {
+    MyBox()
+}
+
+@Composable
+fun MyRow() {
+    Row {
+        Text("Line 1")
+        Button(onClick = { /*TODO*/ }) {
+            Text("Click Me")
+        }
+        Text("Line 2")
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun MyRowPreview() {
+    MyRow()
+}
+
+
+@Composable
+fun MyCol() {
+    Column {
+        Text("Line 1", modifier = Modifier.padding(8.dp).fillMaxWidth())
+        Text("Line 2")
+        Button(onClick = { /*TODO*/ }) {
+            Text("Click Me")
+        }
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun MyColPreview() {
+    MyCol()
 }
 
 
