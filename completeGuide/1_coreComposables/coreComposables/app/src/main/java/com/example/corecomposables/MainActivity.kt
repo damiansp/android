@@ -7,6 +7,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Button
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -27,14 +28,25 @@ class MainActivity : ComponentActivity() {
         setContent {
             CoreComposablesTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
+                    SimpleText()
                 }
             }
         }
     }
+}
+
+
+@Composable
+fun MyButton() {
+    Button(onClick = { /*TODO*/ }) {
+        Text("Click Me!")
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun MyButtonPreview() {
+    MyButton()
 }
 
 
@@ -53,7 +65,9 @@ fun SimpleText() {
     Text(
         text = "\n\nOoo, such style",
         style=myStyle,
-        modifier = Modifier.padding(16.dp).clickable { /*TODO*/ })
+        modifier = Modifier
+            .padding(16.dp)
+            .clickable { /*TODO*/ })
 }
 
 @Preview(showBackground = true)
