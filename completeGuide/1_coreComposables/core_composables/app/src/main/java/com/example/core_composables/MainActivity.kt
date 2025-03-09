@@ -7,13 +7,17 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ButtonElevation
@@ -121,7 +125,9 @@ fun MyButtonPreview() {
 @Composable
 fun MyCol() {
     Column {
-        Text("Item 1")
+        Text("Item 1", modifier = Modifier
+            .padding(8.dp)
+            .fillMaxWidth())
         Text("Item 2")
         // Image(painter = painterResource(id = R.drawable.my_image), contentDescription = null)
     }
@@ -166,6 +172,53 @@ fun MyBoxPreview() {
     MyBox()
 }
 
+
+@Composable
+fun ProductCard(/* product: Product */) {
+    Column(modifier = Modifier
+        .padding(16.dp)
+        .fillMaxWidth()
+        .border(1.dp, Color.Gray)) {
+        // Image...
+        Column(modifier = Modifier.padding(16.dp)) {
+            Text(text = "Campy Derailleur", fontWeight = FontWeight.Bold)
+            Text(text = "A high-precision rear derailleur")
+            Spacer(modifier = Modifier.height(8.dp))
+            Button(onClick = { /* Handle Purchase */}) { Text("Buy Now")}
+        }
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun ProductCardPreview() {
+    Core_composablesTheme {
+        ProductCard()
+    }
+}
+
+
+@Composable
+fun UserProfileHeader(/* user: User */) {
+    Row(modifier = Modifier
+        .padding(16.dp)
+        .fillMaxWidth()) {
+        // Image()
+        Spacer(modifier = Modifier.width(16.dp))
+        Column {
+            Text(text = "Bob Dobolina", fontWeight = FontWeight.Bold)
+            Text(text = "bob@bobdob.com")
+        }
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun UserProfileHeaderPreview() {
+    Core_composablesTheme {
+        UserProfileHeader()
+    }
+}
 
 
 @Composable
