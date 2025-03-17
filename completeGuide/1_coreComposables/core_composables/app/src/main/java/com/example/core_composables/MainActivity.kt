@@ -2,6 +2,7 @@ package com.example.core_composables
 
 import android.graphics.BitmapFactory
 import android.os.Bundle
+import android.widget.Button
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -23,7 +24,14 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ButtonElevation
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -222,13 +230,135 @@ fun UserProfileHeaderPreview() {
 
 
 @Composable
+fun MyComposable() {
+    var showText by remember { mutableStateOf(false) }
+    Column {
+        Button(onClick = {showText = !showText}) {
+            Text(if(showText) "Hide Text" else "Show Text")
+        }
+        if (showText) {
+            Text("The Mystery Toggleable Text")
+        }
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun MyComposablePreview() {
+    Core_composablesTheme {
+        MyComposable()
+    }
+}
+
+
+@Composable
+fun ShowText() {
+    var text by remember { mutableStateOf("Hello") }
+    Column {
+        TextField(value = text, onValueChange = { text = it })
+        Text("Voila: $text")
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun ShowTextPreview() {
+    Core_composablesTheme {
+        ShowText()
+    }
+}
+
+
+@Composable
+fun ToggleColor() {
+    var isRed by remember { mutableStateOf(false) }
+    val buttonColor = if (isRed) Color.Red else Color.Blue
+    Button(onClick = { isRed = !isRed }, colors = ButtonDefaults.buttonColors(buttonColor)) {
+        Text("Change Color")
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun ToggleColorPreview() {
+    Core_composablesTheme {
+        ToggleColor()
+    }
+}
+
+
+@Composable
+fun Counter() {
+    var count by remember { mutableStateOf(0) }
+    Column {
+        Text(text = "Count: $count")
+        Button(onClick = { count++ }) { Text("Increment") }
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun CounterPreview() {
+    Core_composablesTheme {
+        Counter()
+    }
+}
+
+
+@Composable
+fun ParentComposable() {
+    val sharedState = remember { mutableStateOf(0) } // hoisted state
+    Column {
+        ChildComposable1(sharedState)
+        ChildComposable2(sharedState)
+    }
+}
+
+@Composable
+fun ChildComposable1(sharedState: MutableState<Int>) {
+    Button(onClick = { sharedState.value++ }) { // modify shared state
+        Text("Increment from Child 1")
+    }
+}
+
+@Composable
+fun ChildComposable2(sharedState: MutableState<Int>) {
+    Text("Count: ${sharedState.value}")
+}
+
+@Preview(showBackground = true)
+@Composable
+fun ParentComposablePreview() {
+    Core_composablesTheme {
+        ParentComposable()
+    }
+}
+
+
+@Composable
+fun MyTextField() {
+    var text by remember { mutableStateOf("") }
+    TextField(
+        value = text,
+        onValueChange = { newText -> text = newText },
+        label = { Text("Enter text") })
+}
+
+@Preview(showBackground = true)
+@Composable
+fun MyTextFieldPreview() {
+    Core_composablesTheme {
+        MyTextField()
+    }
+}
+
+@Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
     Text(
         text = "Hello $name!",
         modifier = modifier
     )
 }
-
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
